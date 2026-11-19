@@ -2746,24 +2746,20 @@ function switchAdvisory(tab, btn) {
     
     // --- 5. Year Switcher Logic ---
     function switchYear(year) {
-        const content2024 = document.getElementById('events-2024');
-        const content2025 = document.getElementById('events-2025');
-        const buttons = document.querySelectorAll('.year-tab-btn');
+      const years = ['2024', '2025', '2026'];
+      const buttons = document.querySelectorAll('.year-tab-btn');
 
-        if (!content2024 || !content2025) return; // Safety check
+      years.forEach((y, index) => {
+        const content = document.getElementById(`events-${y}`);
+        const isActive = y === String(year);
 
-        if (year === '2024') {
-            content2024.style.display = 'grid';
-            content2025.style.display = 'none';
-            if(buttons[0]) buttons[0].classList.add('active');
-            if(buttons[1]) buttons[1].classList.remove('active');
-        } 
-        else if (year === '2025') {
-            content2024.style.display = 'none';
-            content2025.style.display = 'grid';
-            if(buttons[0]) buttons[0].classList.remove('active');
-            if(buttons[1]) buttons[1].classList.add('active');
+        if (content) {
+          content.style.display = isActive ? 'grid' : 'none';
         }
+        if (buttons[index]) {
+          buttons[index].classList.toggle('active', isActive);
+        }
+      });
     }
 
     // --- 6. CAROUSEL / SLIDER LOGIC (Added) ---
